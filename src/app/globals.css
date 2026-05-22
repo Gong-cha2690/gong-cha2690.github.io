@@ -30,7 +30,7 @@ body {
 }
 
 ::selection {
-  background: #ff1744;
+  background: #00aaff;
   color: #ffffff;
 }
 
@@ -110,5 +110,42 @@ body {
   .animate-fade-up,
   .animate-float-slow {
     animation: none;
+  }
+}
+
+/* Scroll-snap helpers for better cross-browser/mobile behavior */
+.scroll-snap-container {
+  min-height: 100svh;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+.scroll-snap-section {
+  min-height: auto;
+}
+
+@media (min-width: 1024px) and (min-height: 760px) {
+  .scroll-snap-container {
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  .scroll-snap-section {
+    box-sizing: border-box;
+    height: 100svh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .snap-pager-track {
+    transition: transform 850ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@media (max-width: 1023px), (max-height: 759px) {
+  .snap-pager-track {
+    transform: none !important;
   }
 }
