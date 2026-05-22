@@ -43,7 +43,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-[url('/background.jpg')] bg-cover bg-center bg-fixed text-slate-950">
+    <main className="min-h-screen bg-slate-50 text-slate-950">
       <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 py-8 sm:px-10 lg:px-12">
         <header className="flex flex-col gap-4 border-b border-slate-200 pb-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
