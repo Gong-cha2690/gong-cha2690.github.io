@@ -95,7 +95,7 @@ export default function Home() {
                 はじめに
               </p>
               <h2 className="mt-4 max-w-3xl font-serif text-3xl font-bold tracking-normal text-[#241711] sm:text-5xl lg:text-6xl">
-                学んでいることと、取り組んできたことを伝える入口
+                学んでいることと、取り組んできたこと
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-7 text-[#5a4030] sm:text-lg">
                 まずは「誰なのか」「何に取り組んでいるのか」「どんな技術を学んでいるのか」がすぐ伝わるようにします。詳しい研究説明や制作物は別ページに分けて、読みたい人が深く読める形にします。
