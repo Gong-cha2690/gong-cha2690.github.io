@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { PageHeader, PageShell, RetroCard, SectionLabel } from "../components/RetroLayout";
 
 const overviewCards = [
   {
@@ -107,72 +107,48 @@ const improvements = [
 
 export default function ResearchPage() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-950">
-      <div className="mx-auto w-full max-w-6xl px-6 py-8 sm:px-10 lg:px-12">
-        <Link
-          href="/"
-          className="text-sm font-semibold text-slate-600 underline underline-offset-4 transition hover:text-slate-950"
-        >
-          トップへ戻る
-        </Link>
+    <PageShell maxWidth="max-w-6xl">
+      <PageHeader
+        label="Research"
+        title="平面推定に基づくフォトグラメトリ点群の欠損部補間"
+        description="フォトグラメトリは、一般的なカメラ画像から三次元形状を復元できる手軽な手法です。一方で、単色の壁面や天井のように画像上の特徴点が少ない領域では、点群が大きく欠損することがあります。本研究では、室内点群を対象に平面検出アルゴリズムを用いて欠損部を補間し、Ground Truth との比較によって補間効果を定量的に評価しました。"
+      />
 
-        <section className="py-12">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">
-            Research
-          </p>
-
-          <h1 className="mt-4 max-w-4xl text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-            平面推定に基づくフォトグラメトリ点群の欠損部補間
-          </h1>
-
-          <p className="mt-6 max-w-3xl text-base leading-8 text-slate-700">
-            フォトグラメトリは、一般的なカメラ画像から三次元形状を復元できる手軽な手法です。
-            一方で、単色の壁面や天井のように画像上の特徴点が少ない領域では、点群が大きく欠損することがあります。
-            本研究では、室内点群を対象に平面検出アルゴリズムを用いて欠損部を補間し、
-            Ground Truth との比較によって補間効果を定量的に評価しました。
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-2">
-            {keywords.map((keyword) => (
-              <span
-                key={keyword}
-                className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 shadow-sm"
-              >
-                {keyword}
-              </span>
-            ))}
-          </div>
-        </section>
+      <div className="mb-10 flex flex-wrap gap-2">
+        {keywords.map((keyword) => (
+          <span
+            key={keyword}
+            className="border border-[#241711]/25 bg-[#f8ecd0] px-3 py-1 text-xs font-medium text-[#5a4030] shadow-[2px_2px_0_rgba(36,23,17,0.18)]"
+          >
+            {keyword}
+          </span>
+        ))}
+      </div>
 
         <section className="grid gap-4 md:grid-cols-3">
           {overviewCards.map((card) => (
-            <article
-              key={card.title}
-              className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-400">
+            <RetroCard key={card.title}>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#7a252b]">
                 {card.label}
               </p>
-              <h2 className="mt-3 text-xl font-semibold text-slate-900">
+              <h2 className="mt-3 font-serif text-xl font-bold text-[#241711]">
                 {card.title}
               </h2>
-              <p className="mt-3 text-sm leading-7 text-slate-600">
+              <p className="mt-3 text-sm leading-7 text-[#5a4030]">
                 {card.text}
               </p>
-            </article>
+            </RetroCard>
           ))}
         </section>
 
-        <section className="mt-10 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+        <RetroCard className="mt-10 p-6 sm:p-8">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-                Problem
-              </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+              <SectionLabel>Problem</SectionLabel>
+              <h2 className="mt-3 font-serif text-3xl font-bold tracking-normal">
                 なぜ補間が必要なのか
               </h2>
-              <p className="mt-5 text-sm leading-7 text-slate-600">
+              <p className="mt-5 text-sm leading-7 text-[#5a4030]">
                 レーザースキャナによる点群取得は高精度ですが、専用機材が必要でコストも高くなります。
                 一方、フォトグラメトリは写真から点群を生成できるため導入しやすい反面、
                 特徴点の少ない領域では点が生成されにくくなります。
@@ -180,22 +156,20 @@ export default function ResearchPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl bg-slate-950 p-6 text-slate-100">
-              <h3 className="text-lg font-semibold">研究で扱った課題</h3>
-              <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-300">
+            <div className="border-2 border-[#241711] bg-[#241711] p-6 text-[#f8ecd0] shadow-[4px_4px_0_#7a252b]">
+              <h3 className="font-serif text-lg font-bold">研究で扱った課題</h3>
+              <ul className="mt-4 space-y-3 text-sm leading-6 text-[#ead9b8]">
                 <li>・フォトグラメトリ点群では壁面や天井に欠損が発生しやすい</li>
                 <li>・欠損を埋めるだけでなく、過剰に存在しない面を作らない必要がある</li>
                 <li>・補間結果を見た目だけでなく、Ground Truth と比較して定量評価する必要がある</li>
               </ul>
             </div>
           </div>
-        </section>
+        </RetroCard>
 
         <section className="mt-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-            Method
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+          <SectionLabel>Method</SectionLabel>
+          <h2 className="mt-3 font-serif text-3xl font-bold tracking-normal">
             提案手法の流れ
           </h2>
 
@@ -203,12 +177,12 @@ export default function ResearchPage() {
             {methodFlow.map((step, index) => (
               <div
                 key={step}
-                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                className="border-2 border-[#241711]/80 bg-[#f8ecd0] p-5 shadow-[4px_4px_0_rgba(36,23,17,0.22)]"
               >
-                <p className="text-sm font-bold text-slate-400">
+                <p className="text-sm font-bold text-[#7a252b]">
                   STEP {String(index + 1).padStart(2, "0")}
                 </p>
-                <p className="mt-3 text-sm leading-6 text-slate-700">{step}</p>
+                <p className="mt-3 text-sm leading-6 text-[#5a4030]">{step}</p>
               </div>
             ))}
           </div>
@@ -216,45 +190,40 @@ export default function ResearchPage() {
 
         <section className="mt-10 grid gap-4 md:grid-cols-2">
           {algorithms.map((algorithm) => (
-            <article
-              key={algorithm.name}
-              className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
-            >
-              <h2 className="text-2xl font-semibold text-slate-900">
+            <RetroCard key={algorithm.name}>
+              <h2 className="font-serif text-2xl font-bold text-[#241711]">
                 {algorithm.name}
               </h2>
-              <p className="mt-3 text-sm leading-7 text-slate-600">
+              <p className="mt-3 text-sm leading-7 text-[#5a4030]">
                 {algorithm.summary}
               </p>
 
               <div className="mt-5 grid gap-3">
-                <div className="rounded-2xl bg-emerald-50 p-4">
-                  <p className="text-xs font-semibold text-emerald-700">
+                <div className="border border-[#241711]/25 bg-[#c8d6c1] p-4">
+                  <p className="text-xs font-bold text-[#4f3b32]">
                     強み
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-emerald-950">
+                  <p className="mt-2 text-sm leading-6 text-[#241711]">
                     {algorithm.strong}
                   </p>
                 </div>
 
-                <div className="rounded-2xl bg-amber-50 p-4">
-                  <p className="text-xs font-semibold text-amber-700">
+                <div className="border border-[#241711]/25 bg-[#ead9b8] p-4">
+                  <p className="text-xs font-bold text-[#7a252b]">
                     課題
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-amber-950">
+                  <p className="mt-2 text-sm leading-6 text-[#241711]">
                     {algorithm.weak}
                   </p>
                 </div>
               </div>
-            </article>
+            </RetroCard>
           ))}
         </section>
 
-        <section className="mt-10 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-            Experiment
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+        <RetroCard className="mt-10 p-6 sm:p-8">
+          <SectionLabel>Experiment</SectionLabel>
+          <h2 className="mt-3 font-serif text-3xl font-bold tracking-normal">
             実験条件
           </h2>
 
@@ -262,56 +231,51 @@ export default function ResearchPage() {
             {experimentFacts.map((fact) => (
               <div
                 key={fact.title}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+                className="border border-[#241711]/25 bg-[#ead9b8] p-5"
               >
-                <p className="text-sm font-semibold text-slate-500">
+                <p className="text-sm font-bold text-[#7a252b]">
                   {fact.title}
                 </p>
-                <p className="mt-2 text-base font-semibold text-slate-900">
+                <p className="mt-2 text-base font-semibold text-[#241711]">
                   {fact.value}
                 </p>
               </div>
             ))}
           </div>
 
-          <p className="mt-6 text-sm leading-7 text-slate-600">
+          <p className="mt-6 text-sm leading-7 text-[#5a4030]">
             評価では、補間後の点群と Ground Truth 点群を ICP によって位置合わせし、
             各点が一定距離内に対応点を持つかどうかで Precision、Recall、F1 スコアを算出しました。
             床面はもともと木目により特徴点が多く、また Ground Truth 側にも測量機材周辺の欠損があるため、
             評価時には床面を除外しました。
           </p>
-        </section>
+        </RetroCard>
 
         <section className="mt-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-            Result
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+          <SectionLabel>Result</SectionLabel>
+          <h2 className="mt-3 font-serif text-3xl font-bold tracking-normal">
             実験結果と考察
           </h2>
 
           <div className="mt-6 grid gap-4 lg:grid-cols-3">
             {results.map((result) => (
-              <article
-                key={result.title}
-                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
-              >
-                <h3 className="text-xl font-semibold text-slate-900">
+              <RetroCard key={result.title}>
+                <h3 className="font-serif text-xl font-bold text-[#241711]">
                   {result.title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
+                <p className="mt-3 text-sm leading-7 text-[#5a4030]">
                   {result.text}
                 </p>
-              </article>
+              </RetroCard>
             ))}
           </div>
         </section>
 
-        <section className="mt-10 rounded-3xl border border-slate-200 bg-slate-950 p-6 text-slate-100 shadow-sm sm:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">
+        <RetroCard className="mt-10 p-6 sm:p-8" tone="dark">
+          <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#c8d6c1]">
             Improvement
           </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+          <h2 className="mt-3 font-serif text-3xl font-bold tracking-normal">
             改良手法の検討
           </h2>
 
@@ -319,28 +283,26 @@ export default function ResearchPage() {
             {improvements.map((item) => (
               <article
                 key={item.title}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5"
+                className="border border-[#f8ecd0]/25 bg-[#f8ecd0]/10 p-5"
               >
-                <h3 className="text-lg font-semibold text-white">
+                <h3 className="font-serif text-lg font-bold text-[#f8ecd0]">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-slate-300">
+                <p className="mt-3 text-sm leading-7 text-[#ead9b8]">
                   {item.text}
                 </p>
               </article>
             ))}
           </div>
-        </section>
+        </RetroCard>
 
-        <section className="mt-10 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-            Conclusion
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+        <RetroCard className="mt-10 p-6 sm:p-8">
+          <SectionLabel>Conclusion</SectionLabel>
+          <h2 className="mt-3 font-serif text-3xl font-bold tracking-normal">
             まとめ
           </h2>
 
-          <div className="mt-5 space-y-4 text-sm leading-7 text-slate-600">
+          <div className="mt-5 space-y-4 text-sm leading-7 text-[#5a4030]">
             <p>
               本研究では、フォトグラメトリによって生成された室内点群の欠損領域に対し、
               平面検出アルゴリズムを応用した補間手法を検討しました。
@@ -353,20 +315,19 @@ export default function ResearchPage() {
               目的に応じて手法を選択・組み合わせることが重要であると分かりました。
             </p>
           </div>
-        </section>
+        </RetroCard>
 
-        <section className="mt-10 rounded-3xl border border-slate-200 bg-slate-100 p-6 sm:p-8">
-          <h2 className="text-2xl font-semibold tracking-tight">
+        <RetroCard className="mt-10 p-6 sm:p-8" tone="green">
+          <h2 className="font-serif text-2xl font-bold tracking-normal">
             今後の課題
           </h2>
-          <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-700">
+          <ul className="mt-5 space-y-3 text-sm leading-7 text-[#4f3b32]">
             <li>・異なる撮影条件や点群密度を持つデータに対する評価</li>
             <li>・RANSAC や SlidingVoxel のパラメータ最適化</li>
             <li>・大規模平面と小規模平面で補間手法を切り替える処理</li>
             <li>・配管やコンプレッサーなど、円柱形状の検出・補間への拡張</li>
           </ul>
-        </section>
-      </div>
-    </main>
+        </RetroCard>
+    </PageShell>
   );
 }

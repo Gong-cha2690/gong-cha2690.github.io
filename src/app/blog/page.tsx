@@ -1,51 +1,42 @@
 import Link from "next/link";
-
-const posts = [
-  {
-    date: "2026-05-22",
-    title: "ポートフォリオサイトを作ってみる",
-    href: "/blog/20260522",
-  }
-]
+import { PageHeader, PageShell, RetroCard, SectionLabel } from "../components/RetroLayout";
+import { getAllPosts } from "@/lib/posts";
 
 export default function BlogPage() {
+  const posts = getAllPosts();
+
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-950">
-      <div className="mx-auto w-full max-w-5xl px-6 py-8 sm:px-10 lg:px-12">
-        <Link href="/" className="text-sm font-semibold text-slate-600 underline underline-offset-4">
-          トップへ戻る
-        </Link>
+    <PageShell>
+      <PageHeader
+        label="Blog"
+        title="日々の日記と学習ログ"
+        description="Blogは完璧な記事でなくて大丈夫です。詰まったこと、調べたこと、解決したことを残すだけで、学習の過程が伝わります。"
+      />
 
-        <section className="py-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-            Blog
-          </p>
-          <h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
-            日々の日記と学習ログ
-          </h1>
-          <p className="mt-5 max-w-3xl text-base leading-7 text-slate-700">
-            Blogは完璧な記事でなくて大丈夫です。詰まったこと、調べたこと、解決したことを残すだけで、学習の過程が伝わります。
-          </p>
-        </section>
+      <section>
+        <SectionLabel>記事一覧</SectionLabel>
 
-        <section>
-          <h2>記事一覧</h2>
-
-            <div>
-              {posts.map((post) => (
-                <Link 
-                  key={post.href}
-                  href={post.href}
-                  className="block rounded-2xl border border-red-200 bg-white p-4 transition hover:border-red-400 hover:bg-red-50"
-                >
-                  <span>{post.date}</span>
-                  <span>{post.title}</span>
-                </Link>
-              ))}
-            </div>
-        </section>
-      
-      </div>
-    </main>
+        <div className="mt-5 grid gap-4">
+          {posts.map((post) => (
+            <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
+              <RetroCard className="transition duration-300 group-hover:-translate-y-1 group-hover:shadow-[8px_8px_0_#7a252b]">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#7a252b]">
+                  {post.date}
+                </p>
+                <h2 className="mt-3 font-serif text-2xl font-bold tracking-normal text-[#241711]">
+                  {post.title}
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-[#5a4030]">
+                  {post.description}
+                </p>
+                <p className="mt-4 text-sm font-semibold text-[#7a252b] underline underline-offset-4 group-hover:text-[#241711]">
+                  読む
+                </p>
+              </RetroCard>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </PageShell>
   );
 }
