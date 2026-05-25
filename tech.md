@@ -274,6 +274,220 @@ pnpm build
 
 公開用にビルドできるか確認します。
 
+## push と deploy の関係
+
+このプロジェクトでは、`git push` と `deploy` は同じ意味ではありません。
+
+ただし、今の設定では `push` をきっかけに自動で `deploy` が始まるようになっています。
+
+流れはこうです。
+
+```txt
+自分のPCでコードを書く
+  ↓
+git add / git commit
+  ↓
+git push
+  ↓
+GitHubにコードが送られる
+  ↓
+GitHub Actionsが自動で動く
+  ↓
+pnpm install
+  ↓
+pnpm build
+  ↓
+outフォルダが作られる
+  ↓
+GitHub Pagesに公開される
+```
+
+つまり:
+
+```txt
+push
+  GitHubにコードを送ること
+
+deploy
+  実際にWebサイトとして公開すること
+```
+
+です。
+
+今は `.github/workflows/deploy.yml` によって、`push` のあとに `deploy` が自動で続くようになっています。
+
+## このプロジェクトはVercelではなくGitHub Pages
+
+Next.jsの公開方法としては、Vercelを使う方法がよく紹介されます。
+
+VercelはNext.jsを作っている会社のサービスなので、Next.jsとの相性がとても良いです。サーバー側の処理、API、画像最適化なども扱いやすいです。
+
+一方で、このプロジェクトは今のところ GitHub Pages に公開する構成です。
+
+理由は、`next.config.ts` にこの設定があるからです。
+
+```ts
+const nextConfig = {
+  output: "export",
+};
+```
+
+`output: "export"` は、Next.jsのサイトを静的ファイルとして書き出す設定です。
+
+静的ファイルとは、ざっくり言うと:
+
+```txt
+HTML
+CSS
+JavaScript
+画像
+```
+
+だけで表示できるファイルのことです。
+
+GitHub Pagesは、基本的にこのような静的ファイルを公開する場所です。
+
+## GitHub Actionsがしていること
+
+`.github/workflows/deploy.yml` が、自動公開の手順書です。
+
+重要な部分はここです。
+
+```yml
+on:
+  push:
+    branches:
+      - main
+```
+
+これは:
+
+```txt
+mainブランチにpushされたら、この処理を動かす
+```
+
+という意味です。
+
+次に、依存関係を入れます。
+
+```yml
+run: pnpm install --frozen-lockfile
+```
+
+これは GitHub の中に用意された仮想環境で、必要なライブラリをインストールしています。
+
+次に、ビルドします。
+
+```yml
+run: pnpm build
+```
+
+このとき、`next.config.ts` の `output: "export"` によって、公開用の `out` フォルダが作られます。
+
+最後に、その `out` フォルダを GitHub Pages に渡します。
+
+```yml
+uses: actions/upload-pages-artifact@v4
+with:
+  path: out
+```
+
+```yml
+uses: actions/deploy-pages@v4
+```
+
+つまり、GitHub Actionsは:
+
+```txt
+GitHub上で自動的にコマンドを実行してくれる仕組み
+```
+
+です。
+
+## Vercelを使う場合との違い
+
+今の構成:
+
+```txt
+Next.js
+  ↓
+next build
+  ↓
+outフォルダ
+  ↓
+GitHub Actions
+  ↓
+GitHub Pages
+```
+
+Vercelを使う場合:
+
+```txt
+Next.js
+  ↓
+GitHubにpush
+  ↓
+Vercelが自動でビルド
+  ↓
+Vercel上で公開
+```
+
+Vercelの方がNext.jsの機能を広く使いやすいです。
+
+ただし、このポートフォリオのように:
+
+```txt
+自己紹介ページ
+研究ページ
+Blogの静的な記事
+作品紹介
+連絡先
+```
+
+を公開するだけなら、GitHub Pagesでも十分です。
+
+今の自分の理解としては:
+
+```txt
+Vercel
+  Next.jsの機能をフルに使いやすい公開サービス
+
+GitHub Pages
+  静的に書き出したサイトを無料で公開しやすい場所
+
+GitHub Actions
+  push後にビルドや公開作業を自動化する仕組み
+```
+
+です。
+
+## 今の公開構成で気をつけること
+
+GitHub Pages構成では、サーバーが必要な機能は使いにくいです。
+
+たとえば:
+
+```txt
+サーバー側で毎回データを取得する処理
+ログイン機能
+フォーム送信をサーバーで受け取る処理
+API Routeを本格的に使う構成
+```
+
+などは、GitHub Pagesだけでは難しくなります。
+
+一方で、今のポートフォリオでは:
+
+```txt
+ページを作る
+文章を書く
+画像を置く
+リンクを貼る
+静的なBlog記事を増やす
+```
+
+が中心なので、GitHub Pagesで進めて問題ありません。
+
 ## 今後の学習順
 
 1. `src/app/page.tsx` を読んで、Reactのコンポーネントに慣れる

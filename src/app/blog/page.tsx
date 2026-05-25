@@ -3,7 +3,7 @@ import Link from "next/link";
 const posts = [
   {
     date: "2026-05-22",
-    title: "ポートフォリオサイトを作った",
+    title: "ポートフォリオサイトを作ってみる",
     href: "/blog/20260522",
   }
 ]
