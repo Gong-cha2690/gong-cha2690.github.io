@@ -29,7 +29,7 @@ const pageCards = [
     title: "研究",
     href: "/research",
     summary:
-      "フォトグラメトリで得られた三次元点群データの欠損部補間について、背景・手法・成果をまとめます。",
+      "三次元点群データを対象としたの欠損部補間について行っています。",
   },
   {
     number: "03",
@@ -50,7 +50,7 @@ const pageCards = [
     title: "連絡先",
     href: "/contact",
     summary:
-      "GitHub、メール、SNS など、採用担当者が次の行動を取りやすい情報を置きます。",
+      "GitHub、メール、SNS などを勇気が出たら書きます。",
   },
 ];
 
@@ -98,7 +98,7 @@ export default function Home() {
                 学んでいることと、取り組んできたこと
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-7 text-[#5a4030] sm:text-lg">
-                まずは「誰なのか」「何に取り組んでいるのか」「どんな技術を学んでいるのか」がすぐ伝わるようにします。詳しい研究説明や制作物は別ページに分けて、読みたい人が深く読める形にします。
+                まずは「誰なのか」「何に取り組んでいるのか」「どんな技術を学んでいるのか」がすぐ伝わるようにします。詳しい研究説明や制作物は別ページに分けて、読みたい人が深く読める形に。
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -119,7 +119,7 @@ export default function Home() {
                   to do リスト
                 </p>
                 <p className="mt-3 font-serif text-xl font-bold text-[#241711]">
-                  まずは研究ページからでOK
+                  まずは研究ページからで着手
                 </p>
               </div>
               <ol className="space-y-3 text-sm leading-6 text-[#5a4030]">

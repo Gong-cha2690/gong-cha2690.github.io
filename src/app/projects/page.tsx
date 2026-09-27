@@ -7,14 +7,14 @@ const projectDrafts = [
     text: "このサイト自体を制作物として扱い、設計、実装、公開までの流れを説明します。",
   },
   {
-    title: "研究可視化ツール",
+    title: "研究可視化",
     stack: "これから追加",
-    text: "研究データや実験結果を見やすくする小さなWebツールを作る候補です。",
+    text: "研究のレジュメや発表資料ベタ乗せは、見た目が悪そうなのでうまいこと可視化して見せたい。",
   },
   {
-    title: "学習用ミニアプリ",
+    title: "バンド活動",
     stack: "これから追加",
-    text: "Reactの状態管理やコンポーネント分割を練習するための小さな制作物を置きます。",
+    text: "軽音楽部としての活動で自分がかっこいい演奏を見せびらかす。",
   },
 ];
 
@@ -23,8 +23,8 @@ export default function ProjectsPage() {
     <PageShell>
       <PageHeader
         label="Projects"
-        title="Web開発で作ったもの"
-        description="作品ページでは「何を作ったか」だけでなく、「なぜ作ったか」「どの技術を使ったか」「どこを工夫したか」を書くと強くなります。"
+        title="生み出したもの"
+        description="自分で生み出したものについて紹介します。"
       />
 
       <section className="grid gap-4">
